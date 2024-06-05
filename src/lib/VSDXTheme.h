@@ -23,13 +23,7 @@ class VSDCollector;
 
 struct VSDXVariationClrScheme
 {
-  Colour m_varColor1;
-  Colour m_varColor2;
-  Colour m_varColor3;
-  Colour m_varColor4;
-  Colour m_varColor5;
-  Colour m_varColor6;
-  Colour m_varColor7;
+  Colour m_varColor[7];
 
   VSDXVariationClrScheme();
 };
@@ -40,12 +34,7 @@ struct VSDXClrScheme
   Colour m_lt1;
   Colour m_dk2;
   Colour m_lt2;
-  Colour m_accent1;
-  Colour m_accent2;
-  Colour m_accent3;
-  Colour m_accent4;
-  Colour m_accent5;
-  Colour m_accent6;
+  Colour m_accent[6];
   Colour m_hlink;
   Colour m_folHlink;
   Colour m_bkgnd;
@@ -78,14 +67,13 @@ class VSDXTheme
 public:
   VSDXTheme();
   ~VSDXTheme();
+  VSDXTheme(const VSDXTheme &) = delete;
+  VSDXTheme &operator=(const VSDXTheme &) = delete;
   bool parse(librevenge::RVNGInputStream *input);
   boost::optional<Colour> getThemeColour(unsigned value, unsigned variationIndex = 0) const;
   boost::optional<Colour> getFillStyleColour(unsigned value) const;
 
 private:
-  VSDXTheme(const VSDXTheme &);
-  VSDXTheme &operator=(const VSDXTheme &);
-
   boost::optional<Colour> readSrgbClr(xmlTextReaderPtr reader);
   boost::optional<Colour> readSysClr(xmlTextReaderPtr reader);
 
